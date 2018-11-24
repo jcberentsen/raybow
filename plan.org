@@ -1,0 +1,26 @@
+#+TITLE: plan
+
+* References:
+*** Differentiable Monte Carlo Ray Tracing through Edge Sampling
+https://people.csail.mit.edu/tzumao/diffrt/
+
+* Jupyter notebook
+** visualize and mathy
+* Simple 2 pixel ray tracer
+** Display result
+* Half space optimization
+** if x < a then black else white
+** Ground truth a = 0.5
+** Render
+** Compute image error E( I, I^ )
+** Compute ∇E
+*** compute dE/dx
+** x = x + dx
+** Consider the Heaviside step function and
+fu and fl half spaces
+* How does composition of half spaces work?
+** What are the problems?
+
+* From half space to triangle
+
+* When does edge sampling become important?
