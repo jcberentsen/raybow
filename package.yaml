@@ -56,3 +56,6 @@ tests:
     - -with-rtsopts=-N
     dependencies:
     - raybow
+    - tasty
+    - tasty-discover
+    - tasty-hunit

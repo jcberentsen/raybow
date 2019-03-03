@@ -6,9 +6,7 @@ import Horizon
 
 import Prelude hiding (concat)
 import Graphics.Gloss
--- import Graphics.Gloss.Data.Bitmap
 import Data.ByteString (pack, concat)
-import Data.Bits
 
 main :: IO ()
 main = do
@@ -21,7 +19,7 @@ main = do
     100
     Horizon.initialModel
     view
-    step
+    Main.step
 
 view :: Horizon.Model -> Picture
 view model =
@@ -33,4 +31,4 @@ view model =
     scale 100 200 rendering
 
 step :: b1 -> b2 -> Horizon.Model -> Horizon.Model
-step = const (const (\(Horizon.Model (sky, ground, horizon)) -> Horizon.Model ((sky + 1) .&. 255, ground, horizon)))
+step = pure . pure Horizon.step
