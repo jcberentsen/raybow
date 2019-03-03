@@ -43,6 +43,7 @@ executables:
     - -Wredundant-constraints
     dependencies:
     - raybow
+    - ad
     - gloss
     - bytestring
 
@@ -56,6 +57,7 @@ tests:
     - -with-rtsopts=-N
     dependencies:
     - raybow
+    - ad
     - tasty
     - tasty-discover
     - tasty-hunit

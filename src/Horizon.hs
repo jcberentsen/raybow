@@ -50,6 +50,13 @@ imageError real estimate =
     map pixelError $ zip estimate real
 
 step :: Model -> Model
-step (Horizon.Model (sky, ground, horizon))
-  = Horizon.Model ((sky + 1) .&. 255, ground, horizon)
--- TODO use groundTruth for dM computation
+step model@(Horizon.Model (sky, ground, horizon)) =
+  let forward = toPixels model
+      forwardError = imageError groundTruth forward
+      -- backprop to delta Model
+      -- scale v = fromIntegral $ (fromIntegral v) `div` (128 :: Word8)
+      -- delta = map (map scale) forwardError
+      -- backprop
+
+  in
+  Horizon.Model ((sky + 1) .&. 255, ground, horizon)
