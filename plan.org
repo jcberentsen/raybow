@@ -1,26 +1,37 @@
 #+TITLE: plan
 
+* Next
+** TODO Compute Image for Horizon
+** TODO Compute Image error E( I, I^ )
+** DONE Split Main and Lib code
 * References:
 *** Differentiable Monte Carlo Ray Tracing through Edge Sampling
 https://people.csail.mit.edu/tzumao/diffrt/
-
-* Jupyter notebook
-** visualize and mathy
-* Simple 2 pixel ray tracer
-** Display result
-* Half space optimization
+* Horizon model
+** Model parameters
+sky color, ground color, horizon y position
+** Empirical Image: blue sky, green ground, horizon at 0.5
+* Half space optimization (HalfSpace model)
 ** if x < a then black else white
 ** Ground truth a = 0.5
-** Render
-** Compute image error E( I, I^ )
+** [X] Render
+** TODO Compute I
+** TODO Compute image error E( I, I^ )
 ** Compute ∇E
 *** compute dE/dx
 ** x = x + dx
 ** Consider the Heaviside step function and
 fu and fl half spaces
+** Horizon test case or vertical
+* Simple 2 pixel ray tracer
+** DONE Use gloss to render bytestring as BitmapData
+** find sky and ground using gradient descent
+** find horizon y using gradient descent
 * How does composition of half spaces work?
 ** What are the problems?
 
 * From half space to triangle
 
 * When does edge sampling become important?
+* Make a Jupyter notebook?
+** visualize and mathy

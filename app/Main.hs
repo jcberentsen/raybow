@@ -1,35 +1,36 @@
 {-# language OverloadedStrings #-}
 module Main where
 
-import Lib
+-- import Raybow
+import Horizon
 
 import Prelude hiding (concat)
 import Graphics.Gloss
-import Graphics.Gloss.Data.Bitmap
+-- import Graphics.Gloss.Data.Bitmap
 import Data.ByteString (pack, concat)
 import Data.Bits
 
 main :: IO ()
 main = do
-
   let window = InWindow "Raybow" (200,200) (10,400)
-  let background = greyN 0.4
+      background = greyN 0.4
 
-  -- TODO Adjust bitmap to window
-  -- window background picture
-  simulate window background 100 initialModel view step
+  simulate
+    window
+    background
+    100
+    Horizon.initialModel
+    view
+    step
 
-initialModel = 0
-
-view x =
-  let inv = 255 - x
-      bs = (concat . map pack) $
-        [ [0, x, x, 255]
-        , [0, inv, inv, 255]
-        ]
+view :: Horizon.Model -> Picture
+view model =
+  let bs = (concat . map pack) $
+        Horizon.toPixels model
       bitmapFormat = BitmapFormat TopToBottom PxRGBA
-      rendering = bitmapOfByteString 2 1 bitmapFormat bs True
+      rendering = bitmapOfByteString 1 2 bitmapFormat bs True
   in
     scale 100 200 rendering
 
-step = const (const (\x -> (x + 1) .&. 255))
+step :: b1 -> b2 -> Horizon.Model -> Horizon.Model
+step = const (const (\(Horizon.Model (sky, ground, horizon)) -> Horizon.Model ((sky + 1) .&. 255, ground, horizon)))
