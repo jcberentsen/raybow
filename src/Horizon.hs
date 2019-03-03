@@ -3,6 +3,7 @@ module Horizon
     , initialModel
     , toPixels
     , groundTruth
+    , imageError
     , step
     ) where
 
@@ -34,11 +35,19 @@ toPixels (Model (sky, ground, _)) =
   , [ground, ground, 0, 255]
   ]
 
+-- | NOTE: the real Image and the estimated Image seems to diverge
+-- | in semantics here, and if swapped, yields wrong result
+-- | maybe there is something the type system can be used for
+-- | to ensure the quality of this?
+-- | The Real Image somehow has a higher quality of information
+-- | (reminds of propagator information lattice, maybe not too relevant)
+-- | NOTE: Or maybe Error? should be a type encapsulating Real `sub` Estimate?
+-- | perhaps also eventually accomodating differentials
 imageError :: Image -> Image -> Image
-imageError estimage real =
-  let pixelError (pe, pr) = zipWith (-) pe pr
+imageError real estimate =
+  let pixelError (pe, pr) = zipWith (-) pr pe
   in
-    map pixelError $ zip estimage real
+    map pixelError $ zip estimate real
 
 step :: Model -> Model
 step (Horizon.Model (sky, ground, horizon))
